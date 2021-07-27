@@ -1,0 +1,35 @@
+{% extends 'basenew.html' %}
+{% block body %}
+{% load static %}
+<div class="wrapper row0">
+  <main class="hoc container clear">
+     <!-- <hr class="btmspace-80"> -->
+    <!-- <div class="clear"></div> -->
+    <section id="introblocks">
+        <ul class="nospace group btmspace-80"></ul> 
+          <h1>Items related to your search:{{qr}}</h1>
+          {% for i in pr %}
+          
+          <li class="one_third ">
+            <figure><a class="imgover" href="{{i.get_url}}"><img src="{{i.img.url}}" alt="" style="height:250;width: 450;"></a>
+              <figcaption>
+                <h6 class="heading">{{i.name}}</h6>
+                <p>{{i.desc|truncatewords:17}}</p>
+                
+                <p>Rs.{{i.price}}</p>
+                
+                <pr>Stock Available:{{i.stock}}</pr>
+              </figcaption>
+            </figure>
+          </li>
+         
+          
+          {% endfor %}
+  
+        </ul>
+      </section>
+</main>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'basenew.html' %}
+  {% block body %}
+
+{% load static %}
+<head>
+  <style>
+    .dropbtn {
+background-color: #101310;
+color: white;
+padding: 16px;
+font-size: 16px;
+border: none;
+cursor: pointer;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f9f9f9;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+.dropdown:hover .dropbtn {
+background-color: #e3f3e4;
+}
+  </style>
+
+</head>
+<div class="bgded overlay" style="background-image:url({% static 'hm/images/demo/backgrounds/01.jpg' %});">
+  <div class="wrapper row0">
+     
+  
+    <div class="category">
+
+      <div class="dropdown">
+        <button class="dropbtn">Categories</button>
+        <div class="dropdown-content">
+          <b style="color:beige;"><a href="/">All</a></b><br>
+          {% for i in ct %}
+          <b style="color:beige;"><a href={{i.get_url}}>{{i.name}}</a></b><br>
+          {% endfor%}
+        </div>
+      </div>
+      </div>
+      <div id="topbar" class="hoc clear">
+    <div class="fl_right">
+      <!-- ################################################################################################ -->
+      <ul class="nospace">
+       
+        <li id="searchform">
+          <div>
+            <form action="{% url 'search' %}" method="get">
+              <fieldset>
+                <legend>Quick Search:</legend>
+                <input type="text" placeholder="Enter item to search" name="q"><br>
+                <button type="submit"><i class="fas fa-search"></i></button>
+              </fieldset>
+            </form>
+          </div>
+        </li>
+      </ul>
+      <!-- ################################################################################################ -->
+    </div>
+  </div>
+</div>
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <article>
+      <h3 class="heading">Good food, good life.</h3>
+      <p>Quality Food Services at your Doorstep</p>
+     
+    </article>
+    <!-- ################################################################################################ -->
+  </div>
+
+</div>
+
+
+<div class="wrapper row0">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80"></ul> 
+
+        {% for i in pg.object_list %}
+        
+        <li class="one_third ">
+          <figure><a class="imgover" href="{{i.get_url}}"><img src="{{i.img.url}}" alt="" style="height:250;width: 450;"></a>
+            <figcaption>
+              <h6 class="heading">{{i.name}}</h6>
+              <p>{{i.desc|truncatewords:17}}</p>
+<!--               
+              <p>Rs.{{i.price}}</p>
+              
+              <pr>Stock Available:{{i.stock}}</pr> -->
+            </figcaption>
+          </figure>
+        </li>
+       
+        
+        {% endfor %}
+
+      </ul>
+    </section>
+    
+    <!-- ################################################################################################ -->
+    
+    <hr class="btmspace-80">
+    <center>
+      {% for p in pg.paginator.page_range %}
+      <a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p%} active {% endif %}">{{p}}</a>
+      {% endfor %}
+    </center>
+    <div class="clear"></div>
+</main>
+</div>
+
+<!-- </div> -->
+
+{% endblock %}
